@@ -1,0 +1,8 @@
+{
+  "name": "Remix: ProjectFolder AI",
+  "description": "Complete unfinished projects within folders through guided AI collaboration and direct file management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

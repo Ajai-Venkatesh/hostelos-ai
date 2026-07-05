@@ -1,0 +1,313 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* ─── Base ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-color: #f8fafc;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Cursor ────────────────────────────────────────────── */
+@media (pointer: fine) {
+  body, button, a, input, textarea, select,
+  [role="button"], .interactive-card { cursor: none !important; }
+}
+
+/* ─── Spotlight ─────────────────────────────────────────── */
+.spotlight-bg {
+  background-image: radial-gradient(
+    900px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(99, 102, 241, 0.07),
+    rgba(14, 165, 233, 0.04) 40%,
+    transparent 75%
+  );
+  pointer-events: none;
+}
+
+/* ─── Glass ─────────────────────────────────────────────── */
+.glass-panel {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow:
+    0 4px 6px -1px rgba(0,0,0,0.02),
+    0 2px 4px -2px rgba(0,0,0,0.02),
+    inset 0 1px 0 rgba(255,255,255,0.95);
+}
+
+.glass-card {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(226,232,240,0.6);
+  box-shadow: 0 8px 32px -8px rgba(99,102,241,0.07), 0 2px 8px -2px rgba(0,0,0,0.04);
+  transition: box-shadow 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.35s ease;
+}
+.glass-card:hover {
+  box-shadow: 0 20px 48px -12px rgba(99,102,241,0.13), 0 4px 12px -4px rgba(0,0,0,0.06);
+  border-color: rgba(99,102,241,0.18);
+}
+
+/* ─── Floating Label Input ──────────────────────────────── */
+.input-container {
+  position: relative;
+  width: 100%;
+}
+
+/* The input itself */
+.floating-input {
+  display: block;
+  width: 100%;
+  height: 3.75rem;                        /* 60px – generous tap target */
+  padding: 1.5rem 1.25rem 0.5rem 1.25rem; /* top-heavy for label room */
+  background: rgba(255,255,255,0.75);
+  border: 1.5px solid rgba(226,232,240,1);
+  border-radius: 0.875rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #0f172a;
+  outline: none;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+/* With icon: shift text right so it never overlaps */
+.floating-input.has-icon {
+  padding-left: 3rem;                     /* 48px = 16 icon-left + 20 icon-w + 12 gap */
+}
+
+.floating-input:focus {
+  background: #ffffff;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3.5px rgba(99,102,241,0.13);
+}
+
+.floating-input:focus + .floating-label,
+.floating-input:not(:placeholder-shown) + .floating-label {
+  top: 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 800;
+  color: #6366f1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* The label */
+.floating-label {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #94a3b8;
+  pointer-events: none;
+  transition: top 0.18s cubic-bezier(0.16,1,0.3,1),
+              font-size 0.18s cubic-bezier(0.16,1,0.3,1),
+              color 0.18s ease,
+              letter-spacing 0.18s ease;
+  white-space: nowrap;
+  line-height: 1;
+}
+/* Shift label right when there's an icon */
+.floating-label.with-icon { left: 3rem; }
+
+/* The icon wrapper – absolutely centered in the left column */
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;          /* 20px */
+  height: 1.25rem;
+  color: #94a3b8;
+  pointer-events: none;
+  transition: color 0.2s ease;
+  z-index: 2;
+}
+.input-container:focus-within .input-icon { color: #6366f1; }
+
+/* ─── Custom Scrollbar ──────────────────────────────────── */
+.custom-scrollbar { scrollbar-width: thin; scrollbar-color: rgba(99,102,241,0.2) transparent; }
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(99,102,241,0.22); border-radius: 99px; }
+
+/* ─── Premium Buttons ───────────────────────────────────── */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 0.875rem;
+  border: none;
+  box-shadow: 0 4px 16px -4px rgba(79,70,229,0.45), 0 1px 3px rgba(0,0,0,0.06);
+  transition: transform 0.2s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.2s ease,
+              filter 0.2s ease;
+  cursor: none;
+}
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px -6px rgba(79,70,229,0.55), 0 2px 8px rgba(0,0,0,0.08);
+  filter: brightness(1.06);
+}
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0px) scale(0.98);
+  box-shadow: 0 2px 10px -4px rgba(79,70,229,0.35);
+}
+.btn-primary:disabled { opacity: 0.48; cursor: not-allowed; }
+
+/* Shine sweep animation on btn-primary */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+  transform: skewX(-15deg);
+  transition: left 0.55s ease;
+  pointer-events: none;
+}
+.btn-primary:hover::after { left: 160%; }
+
+/* ─── Animated Gradient Border ─────────────────────────── */
+.animated-gradient-border {
+  position: relative;
+  background: white;
+  background-clip: padding-box;
+  border: 1.5px solid transparent;
+  border-radius: 0.875rem;
+}
+.animated-gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #38bdf8, #6366f1, #a855f7, #ec4899);
+  background-size: 300% 300%;
+  animation: gradientFlow 4s ease infinite;
+}
+@keyframes gradientFlow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ─── Aurora / Hero Animations ──────────────────────────── */
+@keyframes aurora-1 {
+  0%,100% { transform: translate(0,0) scale(1); opacity: 0.5; }
+  33%      { transform: translate(30px,-20px) scale(1.08); opacity: 0.65; }
+  66%      { transform: translate(-20px,15px) scale(0.95); opacity: 0.45; }
+}
+@keyframes aurora-2 {
+  0%,100% { transform: translate(0,0) scale(1); opacity: 0.4; }
+  40%      { transform: translate(-25px,30px) scale(1.1); opacity: 0.6; }
+  70%      { transform: translate(20px,-10px) scale(0.92); opacity: 0.35; }
+}
+@keyframes float-card {
+  0%,100% { transform: translateY(0px) rotate(0deg); }
+  50%      { transform: translateY(-10px) rotate(0.5deg); }
+}
+@keyframes float-card-2 {
+  0%,100% { transform: translateY(0px) rotate(0deg); }
+  50%      { transform: translateY(-7px) rotate(-0.4deg); }
+}
+@keyframes particle-drift {
+  0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 0.6; }
+  100% { transform: translateY(-180px) translateX(30px) scale(0.4); opacity: 0; }
+}
+@keyframes pulse-ring {
+  0%   { transform: scale(0.9); opacity: 0.8; }
+  70%  { transform: scale(1.4); opacity: 0; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+@keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes shimmer-line {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(200%); }
+}
+@keyframes typing-cursor {
+  0%,100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+
+.aurora-1 { animation: aurora-1 8s ease-in-out infinite; }
+.aurora-2 { animation: aurora-2 11s ease-in-out infinite; }
+.float-card   { animation: float-card   5s ease-in-out infinite; }
+.float-card-2 { animation: float-card-2 7s ease-in-out infinite; }
+.spin-slow    { animation: spin-slow 20s linear infinite; }
+
+/* ─── Micro-interactions ─────────────────────────────────── */
+.hover-lift {
+  transition: transform 0.22s cubic-bezier(0.16,1,0.3,1),
+              box-shadow 0.22s ease;
+}
+.hover-lift:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -8px rgba(99,102,241,0.2);
+}
+
+.focus-glow:focus-within {
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+  border-radius: 0.875rem;
+}
+
+/* Page-level fade-in */
+@keyframes page-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.page-enter { animation: page-in 0.45s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* Stagger children */
+.animate-stagger > * { animation: page-in 0.4s cubic-bezier(0.16,1,0.3,1) both; }
+.animate-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.animate-stagger > *:nth-child(2) { animation-delay: 0.12s; }
+.animate-stagger > *:nth-child(3) { animation-delay: 0.19s; }
+.animate-stagger > *:nth-child(4) { animation-delay: 0.26s; }
+
+/* Loading skeleton shimmer */
+@keyframes skeleton-shimmer {
+  from { background-position: -400px 0; }
+  to   { background-position: 400px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+  background-size: 800px 100%;
+  animation: skeleton-shimmer 1.6s infinite;
+  border-radius: 0.5rem;
+}
+  
+/* --- CINEMATIC INTRO ANIMATIONS --- */ 
