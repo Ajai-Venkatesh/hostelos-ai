@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 import express from "express";
-import "path";
+import path from "path";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
@@ -360,7 +360,8 @@ For complaints or requests, tell students to use the Submit Request panel in the
   }
 });
 async function startServer() {
-  if (true) {
+  const isProduction = process.env.NODE_ENV === "production" || process.env.RENDER;
+  if (!isProduction) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa"
