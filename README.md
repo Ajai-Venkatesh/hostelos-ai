@@ -1,20 +1,29 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# HostelOS - AI Powered Residential Management 🏢🧠
 
-# Run and deploy your AI Studio app
+![HostelOS Banner](https://images.unsplash.com/photo-1555854877-bab0e564b8d5?auto=format&fit=crop&q=80&w=1200)
 
-This contains everything you need to run your app locally.
+**HostelOS** is a next-generation residential management platform powered entirely by **Google Gemini AI**. It connects students and wardens in real-time, triaging requests, analyzing sentiment, and automating the hostel experience through an advanced AI assistant.
 
-View your app in AI Studio: https://ai.studio/apps/90181590-d45c-4796-919d-2689855a34d3
+### 🌟 Live Demo
+[**Click here to view the live application!**](https://hostelos-ai.onrender.com)
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## 🚀 Key Features
 
+* **🎭 Dual-Role Architecture:** Seamless real-time portal for both Students and Wardens.
+* **🧠 Gemini AI Triage:** Every student request is instantly analyzed for priority, sentiment, and urgency by the Gemini 2.5 Flash model before reaching the warden.
+* **💬 Aura AI Assistant:** A built-in, context-aware AI chatbot that handles student queries, maintenance troubleshooting, and general assistance automatically.
+* **⚡ Real-Time Sync:** Powered by Firebase Firestore, ensuring instant updates across all devices without refreshing.
+* **🎨 Cinematic UI:** Features a high-performance, GPU-accelerated startup sequence, glassmorphism design, and interactive micro-animations for a premium feel.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## 🛠️ Technology Stack
+
+* **Frontend:** React 19, TypeScript, TailwindCSS 4, Vite
+* **Backend:** Node.js, Express
+* **Database:** Firebase Firestore (Real-time NoSQL)
+* **AI Engine:** `@google/genai` (Gemini 2.5 Flash)
+
+## 👨‍💻 Developer
+**Crafted by Ajai Venkatesh**  
+*Architect of Intelligent Solutions*
