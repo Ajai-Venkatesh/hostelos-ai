@@ -19,7 +19,7 @@
 
 ## 🛠️ Technology Stack
 
-* **Frontend:** React 19, TypeScript, TailwindCSS 4, Vite
+* **Frontend:** React 19, TailwindCSS 4, Vite
 * **Backend:** Node.js, Express
 * **Database:** Firebase Firestore (Real-time NoSQL)
 * **AI Engine:** `@google/genai` (Gemini 2.5 Flash)
